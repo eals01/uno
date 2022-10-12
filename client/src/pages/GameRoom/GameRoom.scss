@@ -1,0 +1,316 @@
+@keyframes rotation {
+    from {
+      transform: rotateX(60deg) rotateZ(0deg);
+    }
+    to {
+      transform: rotateX(60deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotationReverse {
+    from {
+      transform: scaleX(-100%) rotateX(60deg) rotateZ(0deg);
+    }
+    to {
+      transform: scaleX(-100%) rotateX(60deg) rotateZ(360deg);
+    }
+}
+
+.tableContainer{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(223,20,20);
+    background: radial-gradient(circle, rgba(223,20,20,1) 0%, rgba(223,20,20,1) 59%, rgba(69,4,4,1) 100%);
+
+    .table {
+        overflow: hidden;
+        perspective: 10000px;
+        perspective-origin: 50% -150%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+
+        .rotatingArrows {
+            width: 400px;
+            height: 400px;
+            top: 85px;
+            position: absolute;
+            filter: opacity(.2);
+            animation: rotation 20s infinite linear;
+        }
+
+        .rotatingArrowsReverse {
+            width: 400px;
+            height: 400px;
+            top: 85px;
+            position: absolute;
+            filter: opacity(.2);
+            animation: rotationReverse 20s infinite linear;
+        }
+
+        .tableUI {
+            z-index: -2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 900px;
+            height: 900px;
+            background: rgb(224,136,21);
+            background: radial-gradient(circle, rgba(224,136,21,1) 0%, rgba(224,136,21,0) 70%);
+            border-radius: 50%;
+            transform: rotateX(60deg);
+
+
+            &:after {
+                content: ' ';
+                display: block;
+                position: absolute;
+                width: 900px;
+                height: 900px;
+                border: 5px solid rgb(255, 0, 0);
+                border-radius: 50%;
+                filter: blur(5px);
+
+            }
+        }
+
+        .drawStack {
+            zoom: 0.6;
+            position: absolute;
+            top: 300px;
+            left: 600px;
+            transform: rotateX(60deg);
+
+            .card {
+                position: absolute;
+                box-shadow: 0px 2px .5px 1px rgb(0,0,0,0.1);
+                transform: rotatez(-45deg) !important;
+
+                &:first-child {
+                    box-shadow: -5px 5px 12px 2px rgb(0,0,0,0.7);
+                }
+            }
+        }
+
+        .playStack {
+            zoom: .74;
+            position: relative;
+            width: 125px;
+            transform: rotateX(60deg);
+
+            .card {
+                z-index: 1;
+                position: absolute;
+                box-shadow: 0px 1px 2px 0px rgb(0,0,0,0.3);
+
+                &:first-child {
+                    box-shadow: 0px 6px 12px 6px rgb(0,0,0,0.3);
+                }
+            }
+        }
+
+        .playerName {
+            z-index: 1;
+            position: absolute;
+            bottom: 0;
+            left: 450px;
+            padding: 5px 20px 5px 20px;
+            width: 100px;
+            text-align: center;
+            background: rgba(30,30,30, 0.5);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .playerHand {
+            zoom: .8;
+            display: flex;
+            position: absolute;
+            bottom: 20px;
+            height: 190px;
+
+
+            .card {
+                position: absolute;
+                bottom: 0;
+                box-shadow: -8px 0px 6px -6px rgb(0,0,0,.5);
+                transition: .1s;
+
+                &:first-child {
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .active.playerHand {
+            .card {
+                cursor: pointer;
+
+                &:hover {
+                    bottom: 30px;
+                }
+            }
+        }
+
+        .inactive.playerHand {
+            .card {
+                &:after {
+                    position: absolute;
+                    content: ' ';
+                    width: 125px;
+                    height: 200px;
+                    background: rgba(0,0,0,0.6);
+                    border-radius: 8px;
+                }
+            }
+        }
+
+        .opponentHand {
+            height: 190px;
+
+            &:before {
+                position: relative;
+                bottom: -200px;
+                display: block;
+                content: ' ';
+                width: 100%;
+                height: 7px;
+                background: black;
+                filter: blur(10px);
+            }
+
+            .card {
+                width: 125px;
+                position: absolute;
+                box-shadow: -8px 0px 6px -6px rgb(0,0,0,.5);
+                transition: .1s;
+
+                &:first-child {
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .leftOpponentName {
+            z-index: 1;
+            position: absolute;
+            bottom: 50%;
+            left: -54px;
+            width: 100px;
+            text-align: center;
+            padding: 5px 20px 5px 20px;
+            background: rgba(30,30,30, 0.5);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            transform: rotateZ(90deg);
+        }
+
+        .leftOpponentHand {
+            zoom: .75;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 250px;
+            transform: rotateX(-45deg) rotateY(40deg);
+        }
+
+        .middleOpponentName {
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            right: 450px;
+            width: 100px;
+            text-align: center;
+            padding: 5px 20px 5px 20px;
+            background: rgba(30,30,30, 0.5);
+            border-end-end-radius: 20px;
+            border-end-start-radius: 20px;
+        }
+
+        .middleOpponentHand {
+            z-index: -1;
+            zoom: 0.59;
+            display: flex;
+            position: absolute;
+            top: 0;
+            transform:rotateX(-40deg);
+        }
+
+        .rightOpponentName {
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            right: -54px;
+            width: 100px;
+            text-align: center;
+            padding: 5px 20px 5px 20px;
+            background: rgba(30,30,30, 0.5);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            transform: rotateZ(-90deg);
+        }
+
+        .rightOpponentHand {
+            zoom: 0.75;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            right: 250px;
+            transform: rotateX(-45deg) rotateY(-45deg);
+        }
+    }
+
+    .chatContainer {
+        zoom: 0.85;
+        width: 450px;
+        height: 200px;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+
+        .chatMessageContainer {
+            overflow-y: scroll;
+            height: calc(100% - 21px);
+    
+            .chatMessage {
+                margin: 0;
+                font-size: 16px;
+                line-height: 24px;
+                color: white;
+                
+                &:nth-child(odd) {
+                    background-color: rgba(0, 0, 0, 0.192)
+                }
+    
+                span {
+                    color: purple;
+                    margin-left: 5px;
+                }
+            }
+        }
+    
+        .messageInput {
+            position: absolute;
+            bottom: 0;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 20px;
+            border: 0px;
+            border-top: 1px solid black;
+            background: none;
+            color: white;
+            
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

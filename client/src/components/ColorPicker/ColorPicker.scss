@@ -1,0 +1,46 @@
+.colorPickerContainer {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    
+    .colorPicker {
+        display: flex;
+        flex-wrap: wrap;
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: black;
+        border-radius: 50%;
+        overflow: hidden;
+    
+        .color {
+            width: 200px;
+            height: 200px;
+        }
+    
+        .red {
+            background: rgb(255, 42, 42);
+        }
+    
+        .green {
+            background: rgb(127, 200, 42);
+        }
+    
+        .blue {
+            background: rgb(42, 127, 255);
+        }
+    
+        .yellow {
+            background: rgb(255, 204, 0);
+        }
+    }
+    
+    .colorPickerBackground {
+        width: 100%;
+        height: 100%;
+        background: rgb(0,0,0,0.5)
+    }
+}

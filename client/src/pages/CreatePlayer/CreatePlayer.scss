@@ -1,0 +1,19 @@
+.createPlayerContainer {
+    display: flex;
+    flex-direction: column;
+
+    span {
+        text-align: center;
+    }
+
+    input {
+        width: 122px;
+        height: 18px;
+        text-align: center;
+    }
+
+    button {
+        width: 130px;
+        height: 26px;
+    }
+}
